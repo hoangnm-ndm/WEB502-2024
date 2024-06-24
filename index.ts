@@ -1,25 +1,55 @@
+// ! Typescript
+
 {
-	const name: String = "Hoang";
-	const age: Number = 18;
-	const skills: String[] = ["Python", "Ruby", "PHP", "JS", "TS"];
+	const name: String = "Nguyen Hoang";
+	const age: Number = 20;
+	const students: String[] = ["Nhung", "Tien", "Quan", "Trang"];
 	const isMarried: Boolean = true;
 
-	type Infor = { name: String; age: Number; skills: String[]; isMarried: Boolean };
-
-	const myInfor: Infor = {
+	const myInfor = {
 		name,
 		age,
-		skills,
+		students,
 		isMarried,
 	};
+	// Object literal
 
-	const HaInfor: Infor = {
-		name: "Ha",
-		age: 10,
-		skills: ["JS", "TS"],
-		isMarried: false,
+	type Product = {
+		id: number;
+		name: String;
+		price: number;
 	};
 
-	// object literal
-	console.log(myInfor);
+	const products: Product[] = [
+		{ id: 1, name: "San pham A", price: 200 },
+		{ id: 2, name: "San pham B", price: 200 },
+		{ id: 3, name: "San pham C", price: 200 },
+	];
+
+	type User = {
+		name: String;
+		phoneNumber: String;
+		email: String;
+		age: Number;
+		isMarried: Boolean;
+	};
+	const myStudent: User = {
+		name: "Ha",
+		phoneNumber: "0123456789",
+		email: "ha@gmail.com",
+		age: 20,
+		isMarried: true,
+	};
 }
+
+/**
+ * Cac kieu du lieu:
+ * 1. String
+ * 2. Number
+ * 3. Boolean
+ * 4. Array
+ * 5. Object
+ * 6. Undefined
+ * 7. Null
+ * 8.
+ */
