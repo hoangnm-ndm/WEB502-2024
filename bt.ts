@@ -1,4 +1,8 @@
-const user = {
+type User = {
+	id: Number;
+};
+
+const user: User = {
 	id: 1,
 	firstName: "Emily",
 	lastName: "Johnson",
