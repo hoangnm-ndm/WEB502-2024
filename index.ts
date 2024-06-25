@@ -15,10 +15,26 @@
 	// Object literal
 
 	type Product = {
-		id: number;
+		id?: number | string;
 		name: String;
 		price: number;
 	};
+
+	type Client = {
+		isMarried: Boolean | String;
+	};
+
+	const client: Client = {
+		isMarried: true,
+	};
+
+	const product1: Product = {
+		id: undefined,
+		name: "san pham 1",
+		price: 200,
+	};
+
+	console.log(product1.id);
 
 	const products: Product[] = [
 		{ id: 1, name: "San pham A", price: 200 },
@@ -51,5 +67,4 @@
  * 5. Object
  * 6. Undefined
  * 7. Null
- * 8.
  */

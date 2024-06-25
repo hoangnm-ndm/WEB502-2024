@@ -1,6 +1,63 @@
+type Address = {
+	address: String;
+	city: String;
+	state: String;
+	stateCode: String;
+	postalCode: String;
+	coordinates: {
+		lat: Number;
+		lng: Number;
+	};
+	country: String;
+};
+
 type User = {
 	id: Number;
-	//
+	firstName: String;
+	lastName: String;
+	maidenName: String;
+	age: Number;
+	gender: String;
+	email: String;
+	phone: String;
+	username: String;
+	password: String;
+	birthDate: String;
+	image: String;
+	bloodGroup: String;
+	height: Number;
+	weight: Number;
+	eyeColor: String;
+	hair: {
+		color: String;
+		type: String;
+	};
+	ip: String;
+	address: Address;
+	macAddress: String;
+	university: String;
+	bank: {
+		cardExpire: String;
+		cardNumber: String;
+		cardType: String;
+		currency: String;
+		iban: String;
+	};
+	company: {
+		department: String;
+		name: String;
+		title: String;
+		address: Address;
+	};
+	ein: String;
+	ssn: String;
+	userAgent: String;
+	crypto: {
+		coin: String;
+		wallet: String;
+		network: String;
+	};
+	role: String;
 };
 
 const user: User = {
@@ -76,3 +133,5 @@ const user: User = {
 };
 
 // ! TODO: Khai báo kiểu dữ liệu cho object user và sử dụng nó để khai báo biến user
+
+console.log(user);
