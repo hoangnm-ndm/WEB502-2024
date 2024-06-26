@@ -1,18 +1,17 @@
 import "./App.css";
+import { Product } from "./interfaces/Product";
+import Admin from "./pages/Admin";
 
-type User = {
-	username: string;
-};
-
-const user: User = {
-	username: "hoangnm62",
-};
+const products: Product[] = [
+	{ id: 1, title: "iphone 15", price: 1000 },
+	{ id: 2, title: "iphone 15", price: 1000 },
+	{ id: 3, title: "iphone 15", price: 1000 },
+];
 
 function App() {
 	return (
 		<>
-			<h1>Hello</h1>
-			<p>{user.username}</p>
+			<Admin products={products} />
 		</>
 	);
 }
