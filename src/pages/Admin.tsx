@@ -2,9 +2,10 @@ import { Product } from "../interfaces/Product";
 
 interface Props {
 	products: Product[];
+	handleRemove: (id: number) => void;
 }
 
-const Admin = ({ products }: Props) => {
+const Admin = ({ products, handleRemove }: Props) => {
 	return (
 		<>
 			<h1>Hello</h1>
@@ -24,7 +25,9 @@ const Admin = ({ products }: Props) => {
 							<td>{item.title}</td>
 							<td>{item.price}</td>
 							<td>
-								<button className="btn btn-danger">Remove</button>
+								<button className="btn btn-danger" onClick={() => handleRemove(item.id)}>
+									Remove
+								</button>
 							</td>
 						</tr>
 					))}

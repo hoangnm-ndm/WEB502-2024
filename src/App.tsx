@@ -2,25 +2,30 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { Product } from "./interfaces/Product";
 import Admin from "./pages/Admin";
+import instance from "./apis";
 
 // extension: Console Ninja
 // state =  trang thai, tinh trang
 
 function App() {
-	const [products, setProducts] = useState([]);
+	const [products, setProducts] = useState<Product[]>([]);
+	// <> -> Khai báo kiểu generic
 	useEffect(() => {
-		fetch("http://localhost:3000/products")
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				setProducts(data);
-				console.log("tai them san pham");
-			})
-			.catch((error) => console.log(error));
+		(async () => {
+			const { data } = await instance.get(`/products`);
+			setProducts(data);
+		})();
 	}, []);
+
+	const handleRemove = async (id: number) => {
+		if (confirm("Are you sure?")) {
+			await instance.delete(`/products/${id}`);
+			setProducts(products.filter((item) => item.id !== id));
+		}
+	};
 	return (
 		<>
-			<Admin products={products} />
+			<Admin products={products} handleRemove={handleRemove} />
 		</>
 	);
 }
