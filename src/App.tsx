@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Product } from "./interfaces/Product";
+import instance from "./apis";
 
 function App() {
 	const [products, setProducts] = useState<Product[]>([]);
@@ -8,17 +9,20 @@ function App() {
 
 	// Promise cần thời gian để trả về.
 	useEffect(() => {
-		fetch("http://localhost:3000/products")
-			.then((response) => response.json())
-			.then((data) => {
-				console.log(data);
-				setProducts(data);
-			})
-			.catch((error) => console.log(error));
+		(async () => {
+			const { data } = await instance.get(`/products`);
+			setProducts(data);
+		})();
 	}, []);
 
 	// state = trạng thái
 
+	const handleRemove = async (id: number) => {
+		if (confirm("Are you sure?")) {
+			await instance.delete(`/products/${id}`);
+			setProducts(products.filter((item) => item.id !== id));
+		}
+	};
 	return (
 		<>
 			<table className="table table-bordered table-striped">
@@ -47,7 +51,9 @@ function App() {
 								</td>
 								<td>
 									<button className="btn btn-warning">Edit</button>
-									<button className="btn btn-danger">Remove</button>
+									<button className="btn btn-danger" onClick={() => handleRemove(item.id!)}>
+										Remove
+									</button>
 								</td>
 							</tr>
 						))
