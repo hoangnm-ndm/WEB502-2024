@@ -1,14 +1,17 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { Product } from "../../interfaces/Product";
 
 type Props = {
 	products: Product[];
-	handleRemove: (id: number) => void;
+	handleRemove: (id: number | string) => void;
 };
 
 const Dashboard = ({ products, handleRemove }: Props) => {
 	return (
 		<div>
+			<Link to={`/admin/product-add`} className="btn btn-success">
+				Add new product
+			</Link>
 			<table className="table table-bordered table-striped">
 				<thead>
 					<tr>
@@ -32,7 +35,9 @@ const Dashboard = ({ products, handleRemove }: Props) => {
 								<img src={item.thumbnail} alt={item.title} width={100} />
 							</td>
 							<td>
-								<button className="btn btn-warning">Edit</button>
+								<Link to={`/admin/product-edit/${item.id}`} className="btn btn-warning">
+									Edit
+								</Link>
 								<button className="btn btn-danger" onClick={() => handleRemove(item.id!)}>
 									Remove
 								</button>
