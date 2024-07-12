@@ -1,14 +1,18 @@
-import { Product } from "../interfaces/Product";
+import { Link } from "react-router-dom";
+import { Product } from "../../interfaces/Product";
 
 interface Props {
 	products: Product[];
 	handleRemove: (id: number) => void;
 }
 
-const Admin = ({ products, handleRemove }: Props) => {
+const Dashboard = ({ products, handleRemove }: Props) => {
 	return (
 		<>
 			<h1>Hello</h1>
+			<Link className="btn btn-success" to={`/admin/product-add`}>
+				Add new product
+			</Link>
 			<table className="table table-bordered table-striped">
 				<thead>
 					<tr>
@@ -25,9 +29,12 @@ const Admin = ({ products, handleRemove }: Props) => {
 							<td>{item.title}</td>
 							<td>{item.price}</td>
 							<td>
-								<button className="btn btn-danger" onClick={() => handleRemove(item.id)}>
+								<button className="btn btn-danger" onClick={() => handleRemove(Number(item.id))}>
 									Remove
 								</button>
+								<Link to={`/admin/product-edit/${item.id}`} className="btn btn-warning">
+									Update
+								</Link>
 							</td>
 						</tr>
 					))}
@@ -37,4 +44,4 @@ const Admin = ({ products, handleRemove }: Props) => {
 	);
 };
 
-export default Admin;
+export default Dashboard;
