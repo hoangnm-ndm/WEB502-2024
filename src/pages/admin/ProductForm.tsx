@@ -5,6 +5,7 @@ import { z } from "zod";
 import { Product } from "../../interfaces/Product";
 import { useEffect } from "react";
 import instance from "../../apis";
+import Button from "../../components/Button";
 
 type Props = {
 	onSubmitProduct: (data: Product) => void;
@@ -68,7 +69,9 @@ const ProductForm = ({ onSubmitProduct }: Props) => {
 					<textarea rows={4} className="form-control" {...register("description")} />
 				</div>
 				<div className="mb-3">
-					<button className="btn btn-primary w-100">{id ? "Edit Product" : "Add product"}</button>
+					{/* <button className="btn btn-primary w-100">{id ? "Edit Product" : "Add product"}</button> */}
+
+					<Button>{id ? "Edit Product" : "Add product"}</Button>
 				</div>
 			</form>
 		</div>

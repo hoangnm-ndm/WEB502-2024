@@ -1814,5 +1814,12 @@
       "description": "ewwewew",
       "id": 33
     }
+  ],
+  "users": [
+    {
+      "email": "email@gmail.com",
+      "password": "$2a$10$BuYEzGZXv2z1JVhFcHi/i.ELHds2pjryszUZLIPiNh.BZY7SPHw46",
+      "id": 1
+    }
   ]
 }
