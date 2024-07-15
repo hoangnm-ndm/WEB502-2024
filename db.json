@@ -65,7 +65,7 @@
       "title": "Eyeshadow Palette with Mirror",
       "description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
       "category": "beauty",
-      "price": 2000,
+      "price": 2000000,
       "discountPercentage": 5.5,
       "rating": 3.28,
       "stock": 44,
@@ -1820,6 +1820,11 @@
       "email": "email@gmail.com",
       "password": "$2a$10$BuYEzGZXv2z1JVhFcHi/i.ELHds2pjryszUZLIPiNh.BZY7SPHw46",
       "id": 1
+    },
+    {
+      "email": "hoangtiensinh@gmail.com",
+      "password": "$2a$10$1DaW4JImA/9DnFkbYM8TPOM2suKqM9GaJWx1FD7gYsxv4ppuiVtTS",
+      "id": 2
     }
   ]
 }

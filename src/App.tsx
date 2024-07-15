@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { Product } from "./interfaces/Product";
 import instance from "./apis";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/admin/Dashboard";
 import ProductForm from "./pages/admin/ProductForm";
@@ -46,6 +46,22 @@ function App() {
 
 	return (
 		<>
+			<header>
+				<ul>
+					<li>
+						<Link to="/">Home</Link>
+					</li>
+					<li>
+						<Link to="/admin">Admin</Link>
+					</li>
+					<li>
+						<Link to="/login">Login</Link>
+					</li>
+					<li>
+						<Link to="/register">Register</Link>
+					</li>
+				</ul>
+			</header>
 			<Routes>
 				{/* Client */}
 				<Route index element={<Home />} />

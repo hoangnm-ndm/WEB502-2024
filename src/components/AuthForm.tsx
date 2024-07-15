@@ -25,10 +25,17 @@ const AuthForm = ({ isLogin }: Props) => {
 
 	const onSubmit = async (data: User) => {
 		try {
-			const res = await instance.post(`/register`, data);
-			console.log(res);
-			nav("/login");
+			if (isLogin) {
+				const res = await instance.post(`/login`, data);
+				localStorage.setItem("token", res.data.token);
+				localStorage.setItem("user", res.data.user);
+				nav("/register");
+			} else {
+				await instance.post(`/register`, data);
+				nav("/login");
+			}
 		} catch (error: any) {
+			console.log(error);
 			alert(error.response.data || "Error");
 		}
 	};

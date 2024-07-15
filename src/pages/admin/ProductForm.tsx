@@ -1,11 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
-import { Product } from "../../interfaces/Product";
-import { useEffect } from "react";
 import instance from "../../apis";
-import Button from "../../components/Button";
+import { Product } from "../../interfaces/Product";
 
 type Props = {
 	onSubmitProduct: (data: Product) => void;
@@ -69,9 +68,7 @@ const ProductForm = ({ onSubmitProduct }: Props) => {
 					<textarea rows={4} className="form-control" {...register("description")} />
 				</div>
 				<div className="mb-3">
-					{/* <button className="btn btn-primary w-100">{id ? "Edit Product" : "Add product"}</button> */}
-
-					<Button>{id ? "Edit Product" : "Add product"}</Button>
+					<button className="btn btn-primary w-100">{id ? "Edit Product" : "Add product"}</button>
 				</div>
 			</form>
 		</div>
