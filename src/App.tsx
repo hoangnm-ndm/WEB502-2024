@@ -7,6 +7,8 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import ProductForm from "./pages/admin/ProductForm";
+import AuthForm from "./pages/AuthForm";
+import Header from "./components/Header";
 
 function App() {
 	const [products, setProducts] = useState<Product[]>([]);
@@ -45,9 +47,12 @@ function App() {
 	};
 	return (
 		<>
+			<Header />
 			<Routes>
 				{/* Client */}
 				<Route path="/" element={<Home data={products} />} />
+				<Route path="/login" element={<AuthForm isLogin />} />
+				<Route path="/register" element={<AuthForm />} />
 
 				{/* Admin */}
 				<Route path="/admin" element={<Dashboard products={products} handleRemove={handleRemove} />} />

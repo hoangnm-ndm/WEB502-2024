@@ -1511,5 +1511,25 @@
       "description": "mo ta",
       "id": 31
     }
+  ],
+  "users": [
+    {
+      "email": "email@gmail.com",
+      "password": "$2a$10$76h3UTgEbb/8i6Tue5rcCOdKF2xwX0lzOUhk0yvgmv60e7DJHxHZu",
+      "confirmPass": "111111",
+      "id": 1
+    },
+    {
+      "email": "email111111@gmail.com",
+      "password": "$2a$10$ZZFNDRUTI3pPHkIR/LUAQ.jm.rRnbmBJKwt6h35lxbeBF645K7pvO",
+      "confirmPass": "111111",
+      "id": 2
+    },
+    {
+      "email": "email1111222211@gmail.com",
+      "password": "$2a$10$rdqkKGYbEqj9BVAetaBtQONXyaIQVlqN.UYQ4O2S2uum4NJgq4J6O",
+      "confirmPass": "111111",
+      "id": 3
+    }
   ]
 }
