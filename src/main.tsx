@@ -14,6 +14,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 		</BrowserRouter>
 	</React.StrictMode>
 );
-
-// const app = document.getElementById("root");
-// ReactDOM.createRoot(app!).render(<h1>Hello</h1>);

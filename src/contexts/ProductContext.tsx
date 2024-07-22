@@ -1,52 +1,50 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useEffect, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import instance from "../apis";
 import { Product } from "../interfaces/Product";
-import { useNavigate } from "react-router-dom";
+import productReducer from "../reducers/productReducer";
 
 type ProductContextType = {
-	products: Product[];
+	state: {
+		products: Product[];
+	};
 	handleRemove: (id: number) => void;
 	onSubmitProduct: (data: Product) => void;
 };
 export const ProductContext = createContext<ProductContextType>({} as ProductContextType);
 
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
-	const [products, setProducts] = useState<Product[]>([]);
+	const [state, dispatch] = useReducer(productReducer, { products: [] });
 	const nav = useNavigate();
 
-	const fetchProduct = async () => {
-		const { data } = await instance.get(`/products`);
-		setProducts(data);
-	};
 	useEffect(() => {
-		fetchProduct();
+		(async () => {
+			const { data } = await instance.get(`/products`);
+			dispatch({ type: "SET_PRODUCTS", payload: data });
+		})();
 	}, []);
 
 	const handleRemove = async (id: number) => {
 		if (confirm("Are you sure?")) {
 			await instance.delete(`/products/${id}`);
-			setProducts(products.filter((item) => item.id !== id));
+			dispatch({ type: "DELETE_PRODUCT", payload: id });
 		}
 	};
 
 	const onSubmitProduct = async (data: Product) => {
 		try {
 			if (data.id) {
-				// logic edit
 				await instance.patch(`/products/${data.id}`, data);
+				dispatch({ type: "UPDATE_PRODUCT", payload: data });
 			} else {
-				// logic add
 				await instance.post(`/products`, data);
+				dispatch({ type: "ADD_PRODUCT", payload: data });
 			}
-
-			fetchProduct();
 			nav("/admin");
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	return (
-		<ProductContext.Provider value={{ products, handleRemove, onSubmitProduct }}>{children}</ProductContext.Provider>
-	);
+	return <ProductContext.Provider value={{ state, handleRemove, onSubmitProduct }}>{children}</ProductContext.Provider>;
 };

@@ -18,8 +18,8 @@ function App() {
 
 				{/* Admin */}
 				<Route path="/admin" element={<Dashboard />} />
-				{/* <Route path="/admin/product-add" element={<ProductForm />} />
-				<Route path="/admin/product-edit/:id" element={<ProductForm />} /> */}
+				<Route path="/admin/product-add" element={<ProductForm />} />
+				<Route path="/admin/product-edit/:id" element={<ProductForm />} />
 			</Routes>
 		</>
 	);

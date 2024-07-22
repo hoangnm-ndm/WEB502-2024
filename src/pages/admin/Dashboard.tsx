@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { Product } from "../../interfaces/Product";
 import { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 
 const Dashboard = () => {
-	const { products, handleRemove } = useContext(ProductContext);
+	const { state, handleRemove } = useContext(ProductContext);
 	return (
 		<>
 			<h1>Hello</h1>
@@ -21,7 +20,7 @@ const Dashboard = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{products.map((item) => (
+					{state.products.map((item) => (
 						<tr key={item.id}>
 							<td>{item.id}</td>
 							<td>{item.title}</td>
