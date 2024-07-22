@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import { Product } from "../../interfaces/Product";
+import { useContext } from "react";
+import { ProductContext } from "../../contexts/ProductContext";
 
-interface Props {
-	products: Product[];
-	handleRemove: (id: number) => void;
-}
-
-const Dashboard = ({ products, handleRemove }: Props) => {
+const Dashboard = () => {
+	const { products, handleRemove } = useContext(ProductContext);
 	return (
 		<>
 			<h1>Hello</h1>
