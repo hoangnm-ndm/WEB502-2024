@@ -3,12 +3,9 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import * as z from "zod";
 import { Product } from "../../interfaces/Product";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import instance from "../../apis";
-
-type Props = {
-	onSubmitProduct: (data: Product) => void;
-};
+import { ProductContext } from "../../contexts/ProductContext";
 
 const productSchema = z.object({
 	title: z.string().min(6),
@@ -16,8 +13,10 @@ const productSchema = z.object({
 	description: z.string().optional(),
 });
 
-const ProductForm = ({ onSubmitProduct }: Props) => {
+const ProductForm = () => {
 	const { id } = useParams();
+
+	const { onSubmitProduct } = useContext(ProductContext);
 	const {
 		handleSubmit,
 		formState: { errors },

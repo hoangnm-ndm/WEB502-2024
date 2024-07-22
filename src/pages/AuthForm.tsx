@@ -30,9 +30,7 @@ const AuthForm = ({ isLogin }: Props) => {
 
 	const onSubmit = async (user: User) => {
 		if (isLogin) {
-			// logic login
 		} else {
-			// logic register
 			await instance.post("/register", user);
 		}
 	};

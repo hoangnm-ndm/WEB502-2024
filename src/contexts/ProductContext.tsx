@@ -1,10 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import instance from "../apis";
 import { Product } from "../interfaces/Product";
 import { useNavigate } from "react-router-dom";
+import productReducer from "../reducers/productReducer";
 
 type ProductContextType = {
-	products: Product[];
+	state: {
+		products: Product[];
+	};
 	handleRemove: (id: number | string) => void;
 	onSubmitProduct: (data: Product) => void;
 };
@@ -16,41 +19,37 @@ type ChirldrenProps = {
 };
 
 export const ProductProvider = ({ children }: ChirldrenProps) => {
-	const [products, setProducts] = useState<Product[]>([]);
+	const [state, dispatch] = useReducer(productReducer, { products: [] });
 
 	const nav = useNavigate();
 
-	const fetchProduct = async () => {
-		const { data } = await instance.get(`/products`);
-		setProducts(data);
-	};
 	useEffect(() => {
-		fetchProduct();
+		(async () => {
+			const { data } = await instance.get(`/products`);
+			dispatch({ type: "SET_PRODUCTS", payload: data });
+		})();
 	}, []);
 
 	const handleRemove = async (id: number | string) => {
 		if (confirm("Are you sure?")) {
 			await instance.delete(`/products/${id}`);
-			setProducts(products.filter((item) => item.id !== id));
+			dispatch({ type: "REMOVE_PRODUCT", payload: id });
 		}
 	};
 
 	const onSubmitProduct = async (data: Product) => {
 		try {
 			if (data.id) {
-				// edit
 				await instance.patch(`/products/${data.id}`, data);
+				dispatch({ type: "UPDATE_PRODUCT", payload: data });
 			} else {
-				// add
 				await instance.post("/products", data);
+				dispatch({ type: "ADD_PRODUCT", payload: data });
 			}
-			fetchProduct();
 			nav("/admin");
 		} catch (error) {
 			console.error(error);
 		}
 	};
-	return (
-		<ProductContext.Provider value={{ products, handleRemove, onSubmitProduct }}>{children}</ProductContext.Provider>
-	);
+	return <ProductContext.Provider value={{ state, handleRemove, onSubmitProduct }}>{children}</ProductContext.Provider>;
 };
