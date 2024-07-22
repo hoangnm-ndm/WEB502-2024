@@ -1,15 +1,12 @@
-import { Product } from "../interfaces/Product";
+import { useContext } from "react";
+import { ProductContext } from "../contexts/ProductContext";
 
-type Props = {
-	data: Product[];
-};
-
-// props = propeties = các thuộc tính.
-
-const Home = ({ data }: Props) => {
+const Home = () => {
+	const { products } = useContext(ProductContext);
+	console.log(products);
 	return (
 		<div>
-			{data.map((item) => (
+			{products.map((item) => (
 				<div key={item.id}>
 					<h2>{item.title}</h2>
 					<p>{item.price}</p>
