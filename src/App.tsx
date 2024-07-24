@@ -10,6 +10,7 @@ import ProductForm from "./pages/admin/ProductForm";
 import AuthForm from "./pages/AuthForm";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 				{/* Client */}
 				<Route path="/" element={<ClientLayout />}>
 					<Route path="/" element={<Home />} />
+					<Route path="/product-detail" element={<ProductDetail />} />
 				</Route>
 
 				{/* Admin */}

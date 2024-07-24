@@ -10,6 +10,7 @@ type ProductContextType = {
 	};
 	handleRemove: (id: number | string) => void;
 	onSubmitProduct: (data: Product) => void;
+	getDetail: (id: number) => void;
 };
 
 export const ProductContext = createContext<ProductContextType>({} as ProductContextType);
@@ -37,6 +38,11 @@ export const ProductProvider = ({ children }: ChirldrenProps) => {
 		}
 	};
 
+	const getDetail = async (id: number) => {
+		await instance.get(`/products/${id}`);
+		dispatch({ type: "GET_DETAIL", payload: id });
+	};
+
 	const onSubmitProduct = async (data: Product) => {
 		try {
 			if (data.id) {
@@ -51,5 +57,9 @@ export const ProductProvider = ({ children }: ChirldrenProps) => {
 			console.error(error);
 		}
 	};
-	return <ProductContext.Provider value={{ state, handleRemove, onSubmitProduct }}>{children}</ProductContext.Provider>;
+	return (
+		<ProductContext.Provider value={{ state, handleRemove, onSubmitProduct, getDetail }}>
+			{children}
+		</ProductContext.Provider>
+	);
 };
