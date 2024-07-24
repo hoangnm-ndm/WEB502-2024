@@ -2,13 +2,15 @@ import { Product } from "../interfaces/Product";
 
 type State = {
 	products: Product[];
+	selectedProduct?: Product;
 };
 
 type Action =
 	| { type: "SET_PRODUCTS"; payload: Product[] }
 	| { type: "ADD_PRODUCT"; payload: Product }
 	| { type: "UPDATE_PRODUCT"; payload: Product }
-	| { type: "DELETE_PRODUCT"; payload: number | string };
+	| { type: "DELETE_PRODUCT"; payload: number | string }
+	| { type: "SET_SELECTED_PRODUCT"; payload: Product };
 
 const productReducer = (state: State, action: Action) => {
 	switch (action.type) {
@@ -34,6 +36,12 @@ const productReducer = (state: State, action: Action) => {
 			return {
 				...state,
 				products: state.products.filter((item) => item.id !== action.payload),
+			};
+
+		case "SET_SELECTED_PRODUCT":
+			return {
+				...state,
+				selectedProduct: state.products.find((item) => item.id === action.payload.id),
 			};
 
 		default:

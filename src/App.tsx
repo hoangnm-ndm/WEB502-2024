@@ -5,21 +5,29 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/admin/Dashboard";
 import ProductForm from "./pages/admin/ProductForm";
 import Header from "./components/Header";
+import ProductDetail from "./pages/ProductDetail";
+import ClientLayout from "./components/ClientLayout";
+import AdminLayout from "./components/AdminLayout";
 
 function App() {
 	return (
 		<>
-			<Header />
 			<Routes>
 				{/* Client */}
-				<Route index element={<Home />} />
-				<Route path="/register" element={<AuthForm />} />
-				<Route path="/login" element={<AuthForm isLogin />} />
+				<Route path="/" element={<ClientLayout />}>
+					<Route index element={<Home />} />
+					<Route path="/product-detail/:id" element={<ProductDetail />} />
+				</Route>
 
 				{/* Admin */}
-				<Route path="/admin" element={<Dashboard />} />
-				<Route path="/admin/product-add" element={<ProductForm />} />
-				<Route path="/admin/product-edit/:id" element={<ProductForm />} />
+				<Route path="/admin" element={<AdminLayout />}>
+					<Route index element={<Dashboard />} />
+					<Route path="/admin/product-add" element={<ProductForm />} />
+					<Route path="/admin/product-edit/:id" element={<ProductForm />} />
+				</Route>
+
+				<Route path="/register" element={<AuthForm />} />
+				<Route path="/login" element={<AuthForm isLogin />} />
 			</Routes>
 		</>
 	);

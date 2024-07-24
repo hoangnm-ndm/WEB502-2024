@@ -7,9 +7,11 @@ import productReducer from "../reducers/productReducer";
 type ProductContextType = {
 	state: {
 		products: Product[];
+		selectedProduct?: Product;
 	};
 	handleRemove: (id: number) => void;
 	onSubmitProduct: (data: Product) => void;
+	getDetail: (data: number | string) => void;
 };
 export const ProductContext = createContext<ProductContextType>({} as ProductContextType);
 
@@ -46,5 +48,15 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
 		}
 	};
 
-	return <ProductContext.Provider value={{ state, handleRemove, onSubmitProduct }}>{children}</ProductContext.Provider>;
+	const getDetail = async (id: number | string | undefined) => {
+		// const product = state.products.find((item) => item.id === id);
+		const { data } = await instance.get(`/products/${id}`);
+		dispatch({ type: "SET_SELECTED_PRODUCT", payload: data });
+	};
+
+	return (
+		<ProductContext.Provider value={{ state, handleRemove, getDetail, onSubmitProduct }}>
+			{children}
+		</ProductContext.Provider>
+	);
 };
