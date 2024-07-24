@@ -19,15 +19,15 @@ function App() {
 				{/* Client */}
 				<Route path="/" element={<ClientLayout />}>
 					<Route path="/" element={<Home />} />
-					<Route path="/product-detail" element={<ProductDetail />} />
+					<Route path="/product-detail/:id" element={<ProductDetail />} />
 				</Route>
 
 				{/* Admin */}
-				{/* <Route path="/admin" element={<AdminLayout />}>
-					<Route path="/admin" element={<Dashboard />} />
+				<Route path="/admin" element={<AdminLayout />}>
+					<Route index element={<Dashboard />} />
 					<Route path="/admin/product-add" element={<ProductForm />} />
 					<Route path="/admin/product-edit/:id" element={<ProductForm />} />
-				</Route> */}
+				</Route>
 
 				<Route path="/login" element={<AuthForm isLogin />} />
 				<Route path="/register" element={<AuthForm />} />

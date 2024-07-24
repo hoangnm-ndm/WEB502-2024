@@ -16,7 +16,7 @@ const productSchema = z.object({
 const ProductForm = () => {
 	const { id } = useParams();
 
-	const { onSubmitProduct } = useContext(ProductContext);
+	const { onSubmitProduct, getDetail, state } = useContext(ProductContext);
 	const {
 		handleSubmit,
 		formState: { errors },
@@ -29,8 +29,8 @@ const ProductForm = () => {
 	if (id) {
 		useEffect(() => {
 			(async () => {
-				const { data } = await instance.get(`/products/${id}`);
-				reset(data);
+				await getDetail(id);
+				reset(state.seletedProduct);
 			})();
 		}, [id]);
 	}
