@@ -11,7 +11,7 @@ type ProductContextType = {
 	};
 	handleRemove: (id: number) => void;
 	onSubmitProduct: (data: Product) => void;
-	getDetail: (data: number | string) => void;
+	getDetail: (data: number | string) => Promise<Product>;
 };
 export const ProductContext = createContext<ProductContextType>({} as ProductContextType);
 
@@ -42,7 +42,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
 				await instance.post(`/products`, data);
 				dispatch({ type: "ADD_PRODUCT", payload: data });
 			}
-			nav("/admin");
+			window.location.href = "/admin";
 		} catch (error) {
 			console.error(error);
 		}
@@ -52,6 +52,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
 		// const product = state.products.find((item) => item.id === id);
 		const { data } = await instance.get(`/products/${id}`);
 		dispatch({ type: "SET_SELECTED_PRODUCT", payload: data });
+		return data;
 	};
 
 	return (

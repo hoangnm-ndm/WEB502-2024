@@ -30,8 +30,8 @@ const ProductForm = () => {
 	if (id) {
 		useEffect(() => {
 			(async () => {
-				await getDetail(id);
-				reset(state.selectedProduct);
+				const data = await getDetail(id);
+				reset(data);
 			})();
 		}, [id]);
 	}

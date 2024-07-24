@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./Header.scss";
 
 const Header = () => {
+	// const {state} = useContext(CartContext)
 	return (
 		<header>
 			<ul>
@@ -17,6 +18,7 @@ const Header = () => {
 				<li>
 					<Link to="/register">Register</Link>
 				</li>
+				{/* <button className="btn btn-warning">Gio hang {state.cart.products.length}</button> */}
 			</ul>
 		</header>
 	);

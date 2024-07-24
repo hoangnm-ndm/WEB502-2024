@@ -4,7 +4,6 @@ import AuthForm from "./components/AuthForm";
 import Home from "./pages/Home";
 import Dashboard from "./pages/admin/Dashboard";
 import ProductForm from "./pages/admin/ProductForm";
-import Header from "./components/Header";
 import ProductDetail from "./pages/ProductDetail";
 import ClientLayout from "./components/ClientLayout";
 import AdminLayout from "./components/AdminLayout";
