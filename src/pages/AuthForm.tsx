@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { User } from "../interfaces/User";
 import instance from "../apis";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
 	isLogin?: boolean;
@@ -28,10 +29,16 @@ const AuthForm = ({ isLogin }: Props) => {
 		resolver: zodResolver(isLogin ? loginSchema : registerSchema),
 	});
 
+	const nav = useNavigate();
 	const onSubmit = async (user: User) => {
 		if (isLogin) {
+			const { data } = await instance.post("/login", user);
+			localStorage.setItem("accessToken", data.accessToken);
+			localStorage.setItem("user", JSON.stringify(data.user));
+			nav("/");
 		} else {
 			await instance.post("/register", user);
+			nav("/login");
 		}
 	};
 	return (

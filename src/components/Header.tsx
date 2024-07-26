@@ -16,6 +16,9 @@ const Header = () => {
 				<li>
 					<Link to="/register">Register</Link>
 				</li>
+				<li>
+					<Link to="/cart">Xem giỏ hàng</Link>
+				</li>
 			</ul>
 		</header>
 	);

@@ -11,6 +11,10 @@ const Home = () => {
 				<div key={item.id}>
 					<Link to={`/product-detail/${item.id}`}>{item.title}</Link>
 					<p>{item.price}</p>
+					<p>{item.description}</p>
+					{/* <button className="btn btn-danger" onClick={}>
+						Add to card
+					</button> */}
 				</div>
 			))}
 		</div>

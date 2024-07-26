@@ -1514,22 +1514,26 @@
   ],
   "users": [
     {
-      "email": "email@gmail.com",
-      "password": "$2a$10$76h3UTgEbb/8i6Tue5rcCOdKF2xwX0lzOUhk0yvgmv60e7DJHxHZu",
+      "email": "admin@gmail.com",
+      "password": "$2a$10$3lc4A6KpgNfiq14/KGU9Funyy8uaDgDsfhmik4Yjxiu9VhkFnuWj.",
       "confirmPass": "111111",
-      "id": 1
-    },
+      "id": 1,
+      "role": "admin"
+    }
+  ],
+  "cart": [
     {
-      "email": "email111111@gmail.com",
-      "password": "$2a$10$ZZFNDRUTI3pPHkIR/LUAQ.jm.rRnbmBJKwt6h35lxbeBF645K7pvO",
-      "confirmPass": "111111",
-      "id": 2
-    },
-    {
-      "email": "email1111222211@gmail.com",
-      "password": "$2a$10$rdqkKGYbEqj9BVAetaBtQONXyaIQVlqN.UYQ4O2S2uum4NJgq4J6O",
-      "confirmPass": "111111",
-      "id": 3
+      "userId": 1,
+      "items": [
+        {
+          "productId": 1,
+          "quantity": 1
+        },
+        {
+          "productId": 2,
+          "quantity": 1
+        }
+      ]
     }
   ]
 }
