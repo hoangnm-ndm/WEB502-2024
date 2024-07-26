@@ -4,6 +4,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import instance from "../apis";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 type Props = {
 	isLogin?: boolean;
@@ -23,15 +25,15 @@ const AuthForm = ({ isLogin }: Props) => {
 
 	const nav = useNavigate();
 
-	const onSubmit = async (data: User) => {
+	const onSubmit = async (user: User) => {
 		try {
 			if (isLogin) {
-				const res = await instance.post(`/login`, data);
-				localStorage.setItem("token", res.data.token);
-				localStorage.setItem("user", res.data.user);
-				nav("/register");
+				const { data } = await instance.post(`/login`, user);
+				localStorage.setItem("accessToken", data.accessToken);
+				localStorage.setItem("user", JSON.stringify(data.user));
+				nav("/");
 			} else {
-				await instance.post(`/register`, data);
+				await instance.post(`/register`, user);
 				nav("/login");
 			}
 		} catch (error: any) {
