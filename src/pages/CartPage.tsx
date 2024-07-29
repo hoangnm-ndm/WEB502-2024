@@ -1,14 +1,7 @@
-import { useContext } from "react";
-import { CartContext } from "../contexts/CartContext";
-
-const Cart = () => {
-	const { state } = useContext(CartContext);
-	console.log(state.products);
-	const total = state.products.reduce((acc, item) => acc + item.quantity, 0);
+const CartPage = () => {
 	return (
 		<div>
-			<h1>Gio hang, Tong san pham: {total}</h1>
-
+			<h1>Gio hang, Tong san pham: {}</h1>
 			<table className="table table-striped table-bordered">
 				<thead>
 					<tr>
@@ -19,18 +12,18 @@ const Cart = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{state.products.map((item) => (
+					{/* {products.map((item) => (
 						<tr>
 							<td>{item.title}</td>
 							<td>{item.price}</td>
 							<td>{item.quantity}</td>
 							<td>{item.price * item.quantity}</td>
 						</tr>
-					))}
+					))} */}
 				</tbody>
 			</table>
 		</div>
 	);
 };
 
-export default Cart;
+export default CartPage;
