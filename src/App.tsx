@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import instance from "./apis";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AdminLayout from "./components/AdminLayout";
 import ClientLayout from "./components/ClientLayout";
-import { Product } from "./interfaces/Product";
 import Dashboard from "./pages/admin/Dashboard";
 import ProductForm from "./pages/admin/ProductForm";
 import AuthForm from "./pages/AuthForm";
+import CartPage from "./pages/Cart";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
-import Cart from "./pages/Cart";
 
 function App() {
 	return (
@@ -20,7 +17,7 @@ function App() {
 				{/* Client */}
 				<Route path="/" element={<ClientLayout />}>
 					<Route path="/" element={<Home />} />
-					<Route path="/cart" element={<Cart />} />
+					<Route path="/cart" element={<CartPage />} />
 					<Route path="/product-detail/:id" element={<ProductDetail />} />
 				</Route>
 
