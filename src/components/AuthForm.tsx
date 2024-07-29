@@ -1,11 +1,9 @@
-import { useForm } from "react-hook-form";
-import { User } from "../interfaces/User";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import instance from "../apis";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import { z } from "zod";
+import instance from "../apis";
+import { User } from "../interfaces/User";
 
 type Props = {
 	isLogin?: boolean;
