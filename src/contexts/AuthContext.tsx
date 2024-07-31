@@ -1,29 +1,45 @@
-import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useState } from "react";
 import { User } from "../interfaces/User";
+import { useNavigate } from "react-router-dom";
+import instance from "../apis";
 
 export type AuthContextType = {
 	user: User | null;
-	logout: () => void;
+	onSubmit: (user: User, isLogin?: boolean) => void;
+	handleLogout: () => void;
 };
+// Auth = authentication & authorization
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-	const [user, setUser] = useState<User>({} as User);
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const nav = useNavigate();
-	useEffect(() => {
-		const accessToken = localStorage.getItem("accessToken"); // làm việc với nodejs thì mới cần.
-		const user = JSON.parse(localStorage.getItem("user") || "{}");
-		setUser(user);
-	}, []);
 
-	const logout = () => {
+	const [user, setUser] = useState<User | null>(null);
+
+	const onSubmit = async (user: User, isLogin?: boolean) => {
+		try {
+			if (isLogin) {
+				const { data } = await instance.post(`/login`, user);
+				localStorage.setItem("accessToken", data.accessToken);
+				localStorage.setItem("user", JSON.stringify(data.user));
+				console.log(data);
+				setUser(data.user);
+				nav("/");
+			} else {
+				await instance.post(`/register`, user);
+				nav("/login");
+			}
+		} catch (error: any) {
+			console.log(error);
+			alert(error.response.data || "Error");
+		}
+	};
+
+	const handleLogout = () => {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("user");
-		setUser({} as User);
+		setUser(null);
 		nav("/login");
 	};
-	return <AuthContext.Provider value={{ user, logout }}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={{ user, onSubmit, handleLogout }}>{children}</AuthContext.Provider>;
 };
-
-export default AuthProvider;

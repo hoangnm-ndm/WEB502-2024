@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import instance from "../apis";
+import { AuthContext } from "../contexts/AuthContext";
 import { User } from "../interfaces/User";
 
 type Props = {
@@ -21,26 +21,10 @@ const AuthForm = ({ isLogin }: Props) => {
 		formState: { errors },
 	} = useForm<User>({ resolver: zodResolver(userSchema) });
 
-	const nav = useNavigate();
+	const { onSubmit } = useContext(AuthContext);
 
-	const onSubmit = async (user: User) => {
-		try {
-			if (isLogin) {
-				const { data } = await instance.post(`/login`, user);
-				localStorage.setItem("accessToken", data.accessToken);
-				localStorage.setItem("user", JSON.stringify(data.user));
-				nav("/");
-			} else {
-				await instance.post(`/register`, user);
-				nav("/login");
-			}
-		} catch (error: any) {
-			console.log(error);
-			alert(error.response.data || "Error");
-		}
-	};
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit((user) => onSubmit(user, isLogin))}>
 			<h1>{isLogin ? "Login" : "Register"}</h1>
 			<div className="mb-3">
 				<label htmlFor="email" className="form-label">
