@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const handleLogout = () => {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("user");
+		localStorage.removeItem("cart");
 		setUser(null);
 		nav("/login");
 	};

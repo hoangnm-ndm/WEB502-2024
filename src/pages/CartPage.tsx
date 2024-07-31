@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartItem } from "../interfaces/Cart";
+import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
 	const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [showQRCode, setShowQRCode] = useState(true);
+	const { user } = useContext(AuthContext);
+	const nav = useNavigate();
 	useEffect(() => {
 		if (cart.length > 0) {
 			const total = cart.reduce((acc: number, item: CartItem) => {
@@ -14,13 +18,13 @@ const CartPage = () => {
 		}
 	}, []);
 
-	console.log(totalPrice);
-
 	const handlePayment = () => {
+		const bill = { user, cart, totalPrice };
+		localStorage.setItem("bill", JSON.stringify(bill));
 		localStorage.removeItem("cart");
 		setShowQRCode(false);
 		alert("Thanh toan thanh cong!");
-		window.location.reload();
+		nav("/order");
 	};
 	return (
 		<div>

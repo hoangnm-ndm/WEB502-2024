@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { ProductContext } from "../contexts/ProductContext";
 import { Product } from "../interfaces/Product";
 import { CartItem } from "../interfaces/Cart";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Home = () => {
 	const { state } = useContext(ProductContext);
-	const user = JSON.parse(localStorage.getItem("user") || "{}");
+	const { user } = useContext(AuthContext);
 	const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 	const addToCart = (product: Product) => {
 		const index = cart.findIndex((item: CartItem) => item.product.id === product.id);
@@ -30,7 +31,7 @@ const Home = () => {
 					<p>{item.price}</p>
 					<button
 						onClick={
-							user.email
+							user?.email
 								? () => addToCart(item)
 								: () => {
 										alert("ban phai dang nhap de thuc hien tinh nang nay!");

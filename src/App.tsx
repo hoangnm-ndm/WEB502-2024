@@ -8,6 +8,7 @@ import ProductDetail from "./pages/ProductDetail";
 import ClientLayout from "./components/ClientLayout";
 import AdminLayout from "./components/AdminLayout";
 import CartPage from "./pages/CartPage";
+import Order from "./pages/Order";
 
 function App() {
 	return (
@@ -16,7 +17,8 @@ function App() {
 				{/* Client */}
 				<Route path="/" element={<ClientLayout />}>
 					<Route index element={<Home />} />
-					<Route path="cart" element={<CartPage />} />
+					<Route path="/cart" element={<CartPage />} />
+					<Route path="/order" element={<Order />} />
 					<Route path="/product-detail/:id" element={<ProductDetail />} />
 				</Route>
 

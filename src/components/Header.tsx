@@ -5,7 +5,6 @@ import { useContext } from "react";
 
 const Header = () => {
 	const { user, handleLogout } = useContext(AuthContext);
-	console.log(user);
 	return (
 		<header>
 			<ul>
@@ -18,11 +17,23 @@ const Header = () => {
 					</li>
 				)}
 				{user ? (
-					<li>
-						<button className="btn btn-warning" onClick={handleLogout}>
-							Logout - {user.email}
-						</button>
-					</li>
+					<>
+						<li>
+							<button className="btn btn-warning" onClick={handleLogout}>
+								Logout - {user.email}
+							</button>
+						</li>
+						<li>
+							<Link to={"/cart"} className="btn btn-warning">
+								Xem Gio hang
+							</Link>
+						</li>
+						<li>
+							<Link to={"/order"} className="btn btn-warning">
+								Xem Don hang
+							</Link>
+						</li>
+					</>
 				) : (
 					<>
 						<li>
@@ -32,12 +43,6 @@ const Header = () => {
 							<Link to="/register">Register</Link>
 						</li>
 					</>
-				)}
-
-				{user && (
-					<Link to={"/cart"} className="btn btn-warning">
-						Xem Gio hang
-					</Link>
 				)}
 			</ul>
 		</header>
