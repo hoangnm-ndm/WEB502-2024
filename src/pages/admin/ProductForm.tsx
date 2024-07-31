@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import * as z from "zod";
 import { Product } from "../../interfaces/Product";
 import { useContext, useEffect } from "react";
-import instance from "../../apis";
 import { ProductContext } from "../../contexts/ProductContext";
 
 const productSchema = z.object({

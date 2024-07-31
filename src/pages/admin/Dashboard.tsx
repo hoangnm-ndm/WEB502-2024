@@ -3,11 +3,6 @@ import { Product } from "../../interfaces/Product";
 import { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 
-type Props = {
-	products: Product[];
-	handleRemove: (id: number | string) => void;
-};
-
 const Dashboard = () => {
 	const { state, handleRemove } = useContext(ProductContext);
 	return (
