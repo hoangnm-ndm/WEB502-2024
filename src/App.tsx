@@ -9,6 +9,7 @@ import CartPage from "./pages/Cart";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
+import Order from "./pages/Order";
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 				<Route path="/" element={<ClientLayout />}>
 					<Route path="/" element={<Home />} />
 					<Route path="/cart" element={<CartPage />} />
+					<Route path="/order" element={<Order />} />
 					<Route path="/product-detail/:id" element={<ProductDetail />} />
 				</Route>
 

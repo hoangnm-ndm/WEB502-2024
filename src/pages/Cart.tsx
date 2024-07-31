@@ -2,8 +2,10 @@ import { Cart } from "../interfaces/Cart";
 
 const CartPage = () => {
 	const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+	const user = JSON.parse(localStorage.getItem("user") || "{}");
+	const checkoutData = { ...cart, ...user };
 	const handleCheckout = () => {
-		localStorage.setItem("checkout", JSON.stringify(cart));
+		localStorage.setItem("checkout", JSON.stringify(checkoutData));
 		localStorage.setItem("cart", "[]");
 		alert("Checkout successfully!");
 		window.location.reload();

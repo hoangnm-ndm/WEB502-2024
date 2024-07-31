@@ -17,7 +17,10 @@ const Header = () => {
 					<Link to="/register">Register</Link>
 				</li>
 				<li>
-					<Link to="/cart">Xem giỏ hàng</Link>
+					<Link to="/cart">Cart</Link>
+				</li>
+				<li>
+					<Link to="/order">Order</Link>
 				</li>
 			</ul>
 		</header>
